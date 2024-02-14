@@ -54,10 +54,11 @@ def parse_player_last_five(row):
 
 def parse_player_last_five(page):
     tree = html.fromstring(page)
-    rows = tree.xpath('//table[@id="last5"]//tbody/tr[not(contains(@class, "thead"))]')
+    rows = tree.xpath('//table[@id="last5"]')
     return list(map(lambda row: parse_player_last_five(row), rows))
 
-#Test
-t = parse_player_last_five("https://www.basketball-reference.com/players/j/jokicni01.html")
-print(t)
+#Unsure
+#//tbody/tr[not(contains(@class, "thead"))]
+
+
 
