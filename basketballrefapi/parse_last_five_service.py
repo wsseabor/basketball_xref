@@ -52,13 +52,17 @@ def parse_player_last_five(row):
         "plus_minus": float(row[26].text_content()),
     }
 
+
 def parse_player_last_five(page):
     tree = html.fromstring(page)
-    rows = tree.xpath('//table[@id="last5"]')
-    return list(map(lambda row: parse_player_last_five(row), rows))
+    
+    rows = tree.xpath('//div[@class="table_container"]//tbody/tr[not(contains(@class, "thead"))]')
+    
+    for row in rows:
+        return list(map(lambda row: parse_player_last_five(row), rows))
 
-#Unsure
-#//tbody/tr[not(contains(@class, "thead"))]
+url = "https://www.basketball-reference.com/players/a/antetgi01.html"
 
+print(parse_player_last_five(url))
 
 
