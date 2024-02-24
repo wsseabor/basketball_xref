@@ -1,5 +1,6 @@
 import requests
 from lxml import html
+from lxml import etree
 
 url = "https://www.basketball-reference.com/players/a/antetgi01.html"
 
@@ -12,7 +13,7 @@ tree = html.fromstring(re.content)
 headers = tree.xpath('//div[@class="table_container"]//thead')
 #ex = tree.xpath('//div[@class="table_container"]//tbody/tr[not(contains(@class, "thead"))]')
 
-ex = tree.xpath('//div[@class="table_container"]//tbody/tr/td[@data-stat="mp"]')
+#ex = tree.xpath('//div[@class="table_container"]//tbody/tr/td[@data-stat="mp"]')
 
 """
 for row in ex:
@@ -28,6 +29,8 @@ def split_rows():
 
     query = '//div[@class="table_container"]//tbody/tr/td[@data-stat="{}"]'
 
+    paths = []
+
     keys = [
         "date",
         "team_name_abbr",
@@ -40,7 +43,7 @@ def split_rows():
         "fga",
         "fg_pct",
         "fg3",
-        "fg3a"
+        "fg3a",
         "fg3_pct",
         "ft",
         "fta",
@@ -59,6 +62,21 @@ def split_rows():
     ]
 
     for i in keys:
-        print(query.format(i))
+        paths.append(query.format(i))
 
-split_rows()
+    return paths
+
+queries = split_rows()
+results = []
+
+for i in queries:
+    results.append(tree.xpath(i).text_content())
+
+print(results)
+
+
+
+
+
+
+
