@@ -70,9 +70,13 @@ queries = split_rows()
 results = []
 
 for i in queries:
-    results.append(tree.xpath(i).text_content())
+    stat = tree.xpath(i)
 
-print(results)
+    for row in stat:
+        print(row.text_content())
+
+for row in stat:
+    print(row.text_content())
 
 
 
