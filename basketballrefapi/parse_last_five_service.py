@@ -60,8 +60,4 @@ def parse_player_last_five(page):
     
     return list(map(lambda row: parse_player_last_five(row), rows))
 
-url = "https://www.basketball-reference.com/players/a/antetgi01.html"
-
-print(parse_player_last_five(url))
-
 
