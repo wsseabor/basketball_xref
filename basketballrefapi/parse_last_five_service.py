@@ -58,8 +58,7 @@ def parse_player_last_five(page):
     
     rows = tree.xpath('//div[@class="table_container"]//tbody/tr[not(contains(@class, "thead"))]')
     
-    for row in rows:
-        return list(map(lambda row: parse_player_last_five(row), rows))
+    return list(map(lambda row: parse_player_last_five(row), rows))
 
 url = "https://www.basketball-reference.com/players/a/antetgi01.html"
 

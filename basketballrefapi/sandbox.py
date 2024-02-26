@@ -1,6 +1,7 @@
 import requests
 from lxml import html
 from lxml import etree
+import csv
 
 url = "https://www.basketball-reference.com/players/a/antetgi01.html"
 
@@ -14,16 +15,6 @@ headers = tree.xpath('//div[@class="table_container"]//thead')
 #ex = tree.xpath('//div[@class="table_container"]//tbody/tr[not(contains(@class, "thead"))]')
 
 #ex = tree.xpath('//div[@class="table_container"]//tbody/tr/td[@data-stat="mp"]')
-
-"""
-for row in ex:
-    print(row.text_content())
-"""
-
-"""
-for row in headers:
-    print(row.text_content())
-"""
 
 def split_rows():
 
@@ -67,19 +58,50 @@ def split_rows():
     return paths
 
 queries = split_rows()
-results = []
+header_rows = [
+        "date",
+        "team_name_abbr",
+        "game_location",
+        "opp_name_abbr",
+        "game_result",
+        "is_starter",
+        "mp",
+        "fg",
+        "fga",
+        "fg_pct",
+        "fg3",
+        "fg3a",
+        "fg3_pct",
+        "ft",
+        "fta",
+        "ft_pct",
+        "orb",
+        "drb",
+        "trb",
+        "ast",
+        "stl",
+        "blk",
+        "tov",
+        "pf",
+        "pts",
+        "game_score",
+        "plus_minus"
+    ]
+
+stats_rows = []
 
 for i in queries:
     stat = tree.xpath(i)
-
+    
     for row in stat:
-        print(row.text_content())
+        stats_rows.append(row.text_content())
 
-for row in stat:
-    print(row.text_content())
+with open('test.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
 
+    writer.writerow(header_rows)
 
-
+    writer.writerow(stats_rows)
 
 
 
