@@ -12,3 +12,5 @@ npm-debug.log
 __pycache__
 .DS_Store
 venv/
+*.csv
+*.ipynb_checkpoints/
