@@ -1,13 +1,16 @@
 from enum import Enum
 
+#To parse home and away games
 class Location(Enum):
     HOME = "HOME"
     AWAY = "AWAY"
 
+#To parse game win / loss
 class Outcome(Enum):
     WIN = "WIN"
     LOSS = "LOSS"
 
+#Parse teams with full name
 class Teams(Enum):
     ATLANTA_HAWKS = "ATLANTA HAWKS"
     BOSTON_CELTICS = "BOSTON CELTICS"
@@ -40,15 +43,18 @@ class Teams(Enum):
     UTAH_JAZZ = "UTAH JAZZ"
     WASHINGTON_WIZARDS = "WASHINGTON WIZARDS"
 
+#For output type in json function
 class OutputType(Enum):
     JSON = "JSON"
 
+#Parsing typical file write options
 class OutputWriteOptions(Enum):
     WRITE = "w"
     CREATE_AND_WRITE = "w+"
     APPEND = "a"
     APPEND_AND_WRITE = "a+"
 
+#Parse position
 class Position(Enum):
     POINT_GUARD = "POINT GUARD"
     SHOOTING_GUARD = "SHOOTING GUARD"
@@ -61,6 +67,7 @@ class Position(Enum):
     FORWARD_CENTER = "FORWARD-CENTER"
     GUARD = "GUARD"
 
+#Parse team abbreviations in data tables in HTML
 TEAM_ABBREVIATIONS_TO_TEAM = {
     'ATL': Teams.ATLANTA_HAWKS,
     'BOS': Teams.BOSTON_CELTICS,
@@ -94,6 +101,7 @@ TEAM_ABBREVIATIONS_TO_TEAM = {
     'WAS': Teams.WASHINGTON_WIZARDS
 }
 
+#Parse position in data tables in HTML
 POSITION_ABBREVIATIONS_TO_POSITION = {
     "PG": Position.POINT_GUARD,
     "SG": Position.SHOOTING_GUARD,
