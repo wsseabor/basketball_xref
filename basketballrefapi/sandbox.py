@@ -11,7 +11,6 @@ from lxml import etree
 import csv
 import pandas as pd
 
-
 """
 
 -- LXML example that is tough to operate -- 
@@ -133,6 +132,20 @@ soup = BeautifulSoup(re.text, 'lxml')
 
 table_data = soup.find('table', { 'class' : 'sortable stats_table' })
 
+def get_headers(page):
+    page = soup.find('table', { 'class' : 'sortable stats_table'})
+
+    headers = page.find_all('th', scope = 'col')
+
+    return [td.get_text(strip = True) for td in headers]
+
+def get_table_data(page):
+    page = soup.find('table', attrs = { 'class' : 'sortable stats_table'})
+
+    stats = page.find_all(['th', 'td'], attrs = { 'data-stat' : any})
+
+    return [td.get_text(strip = True) for td in stats][len(headers):]
+
 def table_data_text(table):
 
     def row_get_data_text(tr, coltag='td'):    
@@ -151,6 +164,13 @@ def table_data_text(table):
 
     return rows
 
+headers = get_headers(re)
+data = get_table_data(re)
+
+print(headers)
+print(data)
+
+"""
 list_table = table_data_text(table_data)
 print(list_table[:5])
 
@@ -160,7 +180,6 @@ with open('test.csv', 'w', newline='') as f:
     writer.writerow(list_table[0])
     writer.writerows(list_table[1:])
 
-"""
 df = pd.DataFrame(list_table[1:], columns = list_table[0])
 df.head(5)
 """
