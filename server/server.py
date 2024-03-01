@@ -1,11 +1,14 @@
 from flask import Flask, jsonify
+from basketballrefapi import sandbox
 
 #App instance
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Working as intended"
+    #Displays JSON data to front end
+    return sandbox.run()
+    
 
 #Driver
 if __name__ == "__main__":
